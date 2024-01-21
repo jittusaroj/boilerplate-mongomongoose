@@ -100,12 +100,19 @@ const removeManyPeople = (done) => {
 
 const queryChain = (done) => {
   const foodToSearch = "burrito";
-  Person.find({ age: 55 })
-  .sort({ name: -1 })
-  .limit(5)
-  .select({ favoriteFoods: 0 })
-  .exec(function(error, people) {
-    done(null, people);
+  Person.find({ favoriteFoods: foodToSearch })
+  .sort('name') // Sort by name
+  .limit(2) // Limit to two documents
+  .select('-age') // Hide the age field
+  .exec((err, data) => {
+    if (err) {
+      // Handle the error
+      console.error(err);
+      done(err, null);
+    } else {
+      // If successful, pass the result to the callback
+      done(null, data);
+    }
   });
 };
 
