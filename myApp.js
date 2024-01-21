@@ -18,17 +18,20 @@ const personSchema  =  new mongoose.Schema({
 const Person = mongoose.model('Person', personSchema);
 
 const createAndSavePerson = (done) => {
-  const person = new Person({
+  const newPerson = new Person({
     name: 'John Doe',
     age: 30,
     favoriteFoods: ['Pizza', 'Ice Cream']
   });
-  person.save((err, data) => {
+
+  // Save the document instance
+  newPerson.save((err, data) => {
     if (err) {
+      // Handle the error
       console.error(err);
     } else {
+      // If saved successfully, call the callback with the saved data
       done(null, data);
-      console.log('Person saved:', savedPerson);
     }
   });
 };
