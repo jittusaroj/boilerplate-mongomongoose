@@ -9,7 +9,7 @@ const personSchema  =  new mongoose.Schema({
     required: true
   },
   age: {
-    type: Number
+    type: String
   },
   favoriteFoods: {
     type: [String]
